@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>配色提取器</title>
+  <style>
+    body {
+      width: 300px;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #f5f7fa, #e4e7f1);
+    }
+    
+    h1 {
+      font-size: 22px;
+      margin-top: 0;
+      color: #2c3e50;
+      text-align: center;
+      background: linear-gradient(to right, #3498db, #2c3e50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding: 10px 0;
+    }
+    
+    .info {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .instructions {
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    
+    .instructions h2 {
+      font-size: 16px;
+      margin-top: 0;
+      color: #333;
+    }
+    
+    .instructions ol {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+    
+    .instructions li {
+      margin-bottom: 8px;
+    }
+    
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #3498db, #2c3e50);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+      background: linear-gradient(to right, #2980b9, #1a2530);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    .btn:active {
+      transform: translateY(1px);
+    }
+    
+    .btn-secondary {
+      background: linear-gradient(to right, #2ecc71, #27ae60);
+    }
+    
+    .btn-secondary:hover {
+      background: linear-gradient(to right, #27ae60, #219653);
+    }
+    
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>网站配色提取器</h1>
+  
+  <div class="info">
+    提取当前网站的配色方案
+  </div>
+  
+  <div class="instructions">
+    <h2>使用说明</h2>
+    <ol>
+      <li>浏览任意网站</li>
+      <li>点击扩展图标查看当前网站配色方案</li>
+      <li>点击色块可复制颜色值</li>
+      <li>使用“刷新配色”按钮重新分析页面</li>
+    </ol>
+  </div>
+  
+  <button id="extractColors" class="btn">立即提取配色</button>
+  <button id="openResults" class="btn btn-secondary">查看配色结果</button>
+  
+  <div class="footer">
+    配色提取器 v1.0
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
