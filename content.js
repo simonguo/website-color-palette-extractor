@@ -468,9 +468,15 @@ function scanPageContrastIssues() {
       return;
     }
     
-    // 获取文本内容
-    const text = element.textContent.trim();
-    if (!text || text.length === 0) return;
+    // 获取文本内容 - 只获取直接文本节点,不包括子元素
+    const directText = Array.from(element.childNodes)
+      .filter(node => node.nodeType === Node.TEXT_NODE)
+      .map(node => node.textContent.trim())
+      .join(' ')
+      .trim();
+    
+    // 如果没有直接文本内容,跳过(避免检查纯容器元素)
+    if (!directText || directText.length < 3) return;
     
     // 获取颜色
     const fgColor = computedStyle.color;
@@ -482,13 +488,16 @@ function scanPageContrastIssues() {
       const fgHex = rgbToHex(fgColor);
       const bgHex = rgbToHex(bgColor);
       
+      // 如果前景色和背景色完全相同,跳过(这明显是错误提取)
+      if (fgHex === bgHex) return;
+      
       // 计算对比度
       const ratio = calculateContrastRatio(fgHex, bgHex);
       
       // 如果不符合 WCAG AA 标准
       if (ratio < threshold) {
         // 生成唯一键：颜色对 + 文本内容前50个字符
-        const uniqueKey = `${fgHex}|${bgHex}|${text.substring(0, 50)}`;
+        const uniqueKey = `${fgHex}|${bgHex}|${directText.substring(0, 50)}`;
         
         // 去重：只添加首次出现的问题
         if (!issueMap.has(uniqueKey) && issues.length < 20) {
@@ -502,7 +511,7 @@ function scanPageContrastIssues() {
             foreground: fgHex,
             background: bgHex,
             ratio: ratio,
-            text: text.substring(0, 150) + (text.length > 150 ? '...' : ''),
+            text: directText.substring(0, 150) + (directText.length > 150 ? '...' : ''),
             selector: getElementSelector(element),
             elementIndex: elementIndex
           });

@@ -304,9 +304,9 @@ function showNotification(message) {
     
   document.body.appendChild(notification);
     
-  // 2.5秒后移除通知
+  // 2.5秒后淡出移除通知
   setTimeout(() => {
-    notification.style.animation = 'fadeOut 0.3s ease';
+    notification.style.opacity = '0';
     setTimeout(() => {
       if (notification.parentNode) {
         notification.remove();

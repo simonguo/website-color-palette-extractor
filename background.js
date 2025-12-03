@@ -4,6 +4,12 @@ chrome.action.onClicked.addListener((tab) => {
   chrome.sidePanel.open({ windowId: tab.windowId });
 });
 
+// Handle side panel
+chrome.sidePanel
+  .setPanelBehavior({ openPanelOnActionClick: true })
+  .catch((error) => console.log(error));
+
+
 // 监听来自内容脚本的消息
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "colorsExtracted") {
